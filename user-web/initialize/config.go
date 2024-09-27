@@ -11,7 +11,7 @@ import (
 )
 
 func InitConfig() {
-	configFilePrefix := "config"
+	configFilePrefix := "local"
 	configFileName := fmt.Sprintf("%s-debug.yaml", configFilePrefix)
 	v := viper.New()
 	v.SetConfigFile(configFileName)

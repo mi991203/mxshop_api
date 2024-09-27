@@ -12,7 +12,7 @@ func IsAdminAuth() gin.HandlerFunc {
 		claims, _ := ctx.Get("claims")
 		currentUser := claims.(*models.CustomClaims)
 
-		if currentUser.AuthorityId != 2 {
+		if currentUser.AuthorityId != 0 {
 			ctx.JSON(http.StatusForbidden, gin.H{
 				"msg": "无权限",
 			})
