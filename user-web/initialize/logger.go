@@ -7,7 +7,7 @@ import (
 
 func InitLogger() {
 	config := &zap.Config{
-		OutputPaths:   []string{"./mxshop_api.log", "stderr"},
+		OutputPaths:   []string{"./mxshop_api_user_web.log", "stderr"},
 		Level:         zap.NewAtomicLevelAt(zap.DebugLevel),
 		Development:   true,
 		Encoding:      "console",
