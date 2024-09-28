@@ -1,1 +1,3 @@
 ./user-web/proto/*.pb.go
+
+user-web/config-local.yaml

@@ -217,7 +217,7 @@ func Register(c *gin.Context) {
 	value, err := rdb.Get(context.Background(), registerForm.Mobile).Result()
 	if err == redis.Nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"code": "验证码错误",
+			"code": "验证码已失效",
 		})
 		return
 	} else {
