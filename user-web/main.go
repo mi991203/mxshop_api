@@ -20,6 +20,9 @@ func main() {
 	initialize.InitConfig()
 	// 初始化Routers
 	Router := initialize.Routers()
+	// 出视线全局UserSrvClient
+	initialize.InitSrvConn()
+
 	// 初始化翻译
 	if err := initialize.InitTrans("zh"); err != nil {
 		panic(err)

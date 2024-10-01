@@ -112,15 +112,15 @@ func PasswordLogin(ctx *gin.Context) {
 	}
 
 	// 拨号连接用户GRPC服务
-	userConn, err := grpc.Dial(fmt.Sprintf("%s:%d", global.ServerConfig.UserSrvInfo.Host,
-		global.ServerConfig.UserSrvInfo.Port), grpc.WithInsecure())
-	if err != nil {
-		zap.S().Errorw("[GetUserList]连接【用户服务失败】", "msg", err.Error())
-	}
-
-	// 调用接口
-	userSrvClient := proto.NewUserClient(userConn)
-	if rsp, err := userSrvClient.GetUserByMobile(ctx, &proto.MobileRequest{
+	//userConn, err := grpc.Dial(fmt.Sprintf("%s:%d", global.ServerConfig.UserSrvInfo.Host,
+	//	global.ServerConfig.UserSrvInfo.Port), grpc.WithInsecure())
+	//if err != nil {
+	//	zap.S().Errorw("[GetUserList]连接【用户服务失败】", "msg", err.Error())
+	//}
+	//
+	//// 调用接口
+	//userSrvClient := proto.NewUserClient(userConn)
+	if rsp, err := global.UserSrvClient.GetUserByMobile(ctx, &proto.MobileRequest{
 		Mobile: form.Mobile,
 	}); err != nil {
 		if e, ok := status.FromError(err); ok {
@@ -138,7 +138,7 @@ func PasswordLogin(ctx *gin.Context) {
 		}
 	} else {
 		// 只是查到用户没有检查密码
-		if passRsp, passErr := userSrvClient.CheckPassword(ctx, &proto.CheckPasswordInfo{
+		if passRsp, passErr := global.UserSrvClient.CheckPassword(ctx, &proto.CheckPasswordInfo{
 			Password:          form.Password,
 			EncryptedPassword: rsp.Password,
 		}); passErr != nil {
